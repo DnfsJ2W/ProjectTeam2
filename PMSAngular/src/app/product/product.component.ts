@@ -1,6 +1,6 @@
 import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PmsService } from '../pms.service';
 @Component({
   selector: 'app-product',
@@ -8,6 +8,7 @@ import { PmsService } from '../pms.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+@Input() item:any;
 
   imageUrl: string = "/assets/img/default-image.png";
   fileToUpload: File = null;
@@ -15,6 +16,7 @@ export class ProductComponent implements OnInit {
   PName:any;
   ImageName:any;
   ImageCode: any;
+  Image:any;
   Price:any;
   Discount:any;
   Quantity:any;
@@ -23,6 +25,7 @@ export class ProductComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   p:any = new Product();
+  check:any;
 
 
   constructor(private productService : PmsService) {
@@ -30,11 +33,14 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProductById();
+    if(this.item==2)
+    this.check=false;
+    else
+    this.check=true;
   }
 
-  getProductById(){
-    this.productService.getProduct(2).subscribe(response => {
+  getProductByName(PName){
+    this.productService.getProduct(PName).subscribe(response => {
 
       this.p = response;
       this.PID=this.p.PID;
@@ -67,8 +73,24 @@ export class ProductComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
+  AddProduct(PName,ImageName,Image,Price,Discount,Quantity,IsStock){
+    this.productService.postProduct(PName,ImageName,this.fileToUpload,Price,Discount,Quantity,IsStock).subscribe(
+      data =>{
+        console.log('done');
+        this.PID=null;
+        this.PName = null;
+        this.ImageName=null;
+        this.Price=null;
+        this.Discount=null;
+        this.Quantity=null;
+        this.IsStock=null;
+        Image = null;
+        this.imageUrl = "/assets/img/default-image.png";
+      }
+    );
+  }
 
-   OnSubmit(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock){
+  UpdateProduct(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock){
     this.productService.putProduct(PID,PName,ImageName,this.fileToUpload,Price,Discount,Quantity,IsStock).subscribe(
       data =>{
         console.log('done');
@@ -83,6 +105,18 @@ export class ProductComponent implements OnInit {
         this.imageUrl = "/assets/img/default-image.png";
       }
     );
+  }
+
+   OnSubmit(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock){
+    if(this.item==2)
+    {
+      debugger;
+      this.getProductByName(this.PName);
+    }
+    else if(this.item==3)
+    this.AddProduct(PName,ImageName,Image,Price,Discount,Quantity,IsStock);
+    else if(this.item==4)
+    this.UpdateProduct(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock);
    }
 }
 

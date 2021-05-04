@@ -57,3 +57,15 @@ C:\Project\ProjectTeam2\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.csproj
 C:\Project\ProjectTeam2\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.csproj.CopyComplete
 C:\Project\ProjectTeam2\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.dll
 C:\Project\ProjectTeam2\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.pdb
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\PMS_DAL.dll.config
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\PMS_DAL.dll
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\PMS_DAL.pdb
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\EntityFramework.dll
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\EntityFramework.xml
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.csprojAssemblyReference.cache
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.csproj.CoreCompileInputs.cache
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.csproj.CopyComplete
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.dll
+E:\ProjectTeam2-buy-products-payment-api\ProductManagementSystem\PMS_DAL\obj\Debug\PMS_DAL.pdb

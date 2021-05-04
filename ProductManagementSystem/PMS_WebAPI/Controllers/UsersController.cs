@@ -14,6 +14,7 @@ namespace PMS_WebAPI.Controllers
     {
         PMSEntities db = new PMSEntities();
 
+        //Done by Venkatesh
         [HttpPost]
         [Route("api/RegisterUser")]
         public HttpResponseMessage RegisterUser([FromBody] UserMaster user)

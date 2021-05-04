@@ -5,12 +5,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PmsService {
+
   endpoint = 'https://localhost:44335/api/';
 
   constructor(private http : HttpClient) { }
 
-  getProduct(PID: number) {
-    return this.http.get(this.endpoint+'/GetProduct/'+PID);
+  getProducts() {
+    return this.http.get(this.endpoint+'/GetProducts');
+  }
+
+  getProduct(PName: any) {
+    return this.http.get(this.endpoint+'/GetProduct/'+PName);
   }
 
   postProduct(PName: string, ImageName: string, fileToUpload: File,Price: string, Discount: string,Quantity: string, IsStock: string) {
