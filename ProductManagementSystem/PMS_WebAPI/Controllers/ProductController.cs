@@ -19,7 +19,7 @@ namespace PMS_WebAPI.Controllers
     {
         PMSEntities db = new PMSEntities();
 
-
+        //Done by Shiva
         [HttpGet]
         [Route("api/GetProducts")]
         public IEnumerable<Product> GetProduct()
@@ -45,6 +45,7 @@ namespace PMS_WebAPI.Controllers
             return products1;
         }
 
+        //Done by Shiva
         [HttpGet]
         [Route("api/GetProduct/{id}")]
         public Product GetProduct(int id)
@@ -71,6 +72,7 @@ namespace PMS_WebAPI.Controllers
             return product1;
         }
 
+        //Done by Shiva
         [HttpPost]
         [Route("api/AddProduct")]
         public HttpResponseMessage AddProduct()
@@ -123,6 +125,7 @@ namespace PMS_WebAPI.Controllers
             return result;
         }
 
+        //Done by Shiva
         [HttpPut]
         [Route("api/UpdateProduct/{id}")]
         public HttpResponseMessage UpdateProduct(int id)
@@ -191,10 +194,13 @@ namespace PMS_WebAPI.Controllers
             return result;
         }
 
+        //Done by Shiva
         private bool ProductExists(int id)
         {
             return db.Products.Count(e => e.PID == id) > 0;
         }
+
+        //Done by Aditya
         [HttpPost]
         [Route("api/AddToCart")]
         public void AddToCart(Cart cart)
@@ -202,6 +208,8 @@ namespace PMS_WebAPI.Controllers
             db.Carts.Add(cart);
             db.SaveChanges();
         }
+
+        //Done by Aditya
         [HttpDelete]
         [Route("api/DeleteCart")]
         public void DeleteCart(int cartId)
@@ -218,6 +226,8 @@ namespace PMS_WebAPI.Controllers
                 db.Carts.Remove(cart);
             }
         }
+
+        //Done by Maheshwari
         [HttpDelete]
        [Route("api/DeleteProduct/{id}")]
         // [AcceptVerbs("Get")]
@@ -240,6 +250,8 @@ namespace PMS_WebAPI.Controllers
                     }
 
         }
+
+        //Done by Maheshwari
         [HttpPost]
         [Route("api/AddOrder")]
         public int AddOrder([FromBody] Product product)
@@ -271,6 +283,7 @@ namespace PMS_WebAPI.Controllers
             return max;
         }
 
+        //Done by Maheshwari
         [HttpGet]
         [Route("api/GetOrder")]
         [AcceptVerbs("GET")]
@@ -302,6 +315,7 @@ namespace PMS_WebAPI.Controllers
             return orders1;
         }
 
+        //Done by Maheshwari
         [HttpGet]
         [Route("api/GetOrder/{id}")]
         public Order GetOrder(int id)
@@ -321,7 +335,7 @@ namespace PMS_WebAPI.Controllers
             return orders1;
         }
 
-       // [HttpPost]
+        // [HttpPost]
         //[Route("api/AddPayment")]
         //public HttpResponseMessage AddPayment()
         //{
@@ -343,6 +357,54 @@ namespace PMS_WebAPI.Controllers
         //    // return max;
         //    return result;
         //}
+
+        //Done by Shoeb
+        [HttpGet]
+        [Route("api/GetPlacedOrders")]
+        public List<Order> GetPlacedOrders()
+
+        {
+            List<Order> a = db.Orders.ToList<Order>();
+            return a;
+        }
+
+        //Done by Shoeb
+        [HttpGet]
+        [Route("api/GetCart")]
+        public IEnumerable<Cart> GetCart()
+        {
+            IList<Cart> products = db.Carts.ToList<Cart>();
+            List<Cart> products1 = new List<Cart>();
+            foreach (var p in products)
+            {
+                Cart List = new Cart()
+                {
+                    ProductId = p.ProductId,
+                    UserId = p.UserId,
+                    CartId = p.CartId,
+
+                };
+
+                products1.Add(List);
+            }
+            return products1;
+        }
+
+        //Done by Shoeb
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        //Done by Shoeb
+        private bool tblOrderExists(int id)
+        {
+            return db.Orders.Count(e => e.OrderId == id) > 0;
+        }
     }
 
 
