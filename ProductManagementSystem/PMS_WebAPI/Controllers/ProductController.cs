@@ -218,10 +218,11 @@ namespace PMS_WebAPI.Controllers
                 db.Carts.Remove(cart);
             }
         }
-        [Route("api/DeleteProduct")]
+        [HttpDelete]
+       [Route("api/DeleteProduct/{id}")]
         // [AcceptVerbs("Get")]
-        public void DeleteProduct(int id)
-        {
+        public void  DeleteProduct(int id)
+        { 
             Product product = (from p in db.Products
                                where p.PID == id
                                select p).FirstOrDefault();
@@ -231,13 +232,19 @@ namespace PMS_WebAPI.Controllers
             }
             else
             {
+                //db.Entry(product).State = System.Data.Entity.EntityState.Deleted;
+
                 db.Products.Remove(product);
-            }
+                db.SaveChanges();
+                    
+                    }
+
         }
         [HttpPost]
         [Route("api/AddOrder")]
-        public HttpResponseMessage AddOrder()
+        public int AddOrder([FromBody] Product product)
         {
+            Payment payments = new Payment();
             Order order = new Order();
             HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
@@ -247,13 +254,21 @@ namespace PMS_WebAPI.Controllers
             order.UserId = Convert.ToInt32(httpRequest["UserId"]);
             order.BookingOn = Convert.ToDateTime(httpRequest["BookingOn"]);
             order.DeliveredOn = Convert.ToDateTime(httpRequest["DeliveredOn"]);
+
+            payments.OrderId = Convert.ToInt32(httpRequest["OrderId"]);
+            payments.UserId = Convert.ToInt32(httpRequest["UserId"]);
+            payments.CardNo = Convert.ToString(httpRequest["CardNo"]);
+            payments.BankName = Convert.ToString(httpRequest["BankName"]);
+            payments.NameOnCard = Convert.ToString(httpRequest["NameOnCard"]);
+            payments.ExpiryDate = Convert.ToDateTime(httpRequest["ExpiryDate"]);
+            db.Payments.Add(payments);
             db.Orders.Add(order);
             db.SaveChanges();
             var max = db.Orders.OrderByDescending(p => p.OrderId).FirstOrDefault().OrderId;
             result = Request.CreateResponse(HttpStatusCode.Created);
 
             // return max;
-            return result;
+            return max;
         }
 
         [HttpGet]
@@ -303,36 +318,31 @@ namespace PMS_WebAPI.Controllers
                 BookingOn = order.BookingOn,
                 DeliveredOn = order.DeliveredOn,
             };
-            //byte[] imgData = product.ImageCode;
-            //MemoryStream ms = new MemoryStream(imgData);
-            //HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-            //response.Content = new StreamContent(ms);
-            //response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpg");
             return orders1;
         }
 
-        [HttpPost]
-        [Route("api/AddPayment")]
-        public HttpResponseMessage AddPayment()
-        {
-            Payment payments = new Payment();
-            HttpResponseMessage result = null;
-            var httpRequest = HttpContext.Current.Request;
+       // [HttpPost]
+        //[Route("api/AddPayment")]
+        //public HttpResponseMessage AddPayment()
+        //{
+        //    Payment payments = new Payment();
+        //    HttpResponseMessage result = null;
+        //    var httpRequest = HttpContext.Current.Request;
 
-            payments.OrderId = Convert.ToInt32(httpRequest["OrderId"]);
-            payments.UserId = Convert.ToInt32(httpRequest["UserId"]);
-            payments.CardNo = Convert.ToString(httpRequest["CardNo"]);
-            payments.BankName = Convert.ToString(httpRequest["BankName"]);
-            payments.NameOnCard = Convert.ToString(httpRequest["NameOnCard"]);
-            payments.ExpiryDate = Convert.ToDateTime(httpRequest["ExpiryDate"]);
-            db.Payments.Add(payments);
-            db.SaveChanges();
-            // var max = db.Orders.OrderByDescending(p => p.OrderId).FirstOrDefault().OrderId;
-            result = Request.CreateResponse(HttpStatusCode.Created);
+        //    payments.OrderId = Convert.ToInt32(httpRequest["OrderId"]);
+        //    payments.UserId = Convert.ToInt32(httpRequest["UserId"]);
+        //    payments.CardNo = Convert.ToString(httpRequest["CardNo"]);
+        //    payments.BankName = Convert.ToString(httpRequest["BankName"]);
+        //    payments.NameOnCard = Convert.ToString(httpRequest["NameOnCard"]);
+        //    payments.ExpiryDate = Convert.ToDateTime(httpRequest["ExpiryDate"]);
+        //    db.Payments.Add(payments);
+        //    db.SaveChanges();
+        //    // var max = db.Orders.OrderByDescending(p => p.OrderId).FirstOrDefault().OrderId;
+        //    result = Request.CreateResponse(HttpStatusCode.Created);
 
-            // return max;
-            return result;
-        }
+        //    // return max;
+        //    return result;
+        //}
     }
 
 
