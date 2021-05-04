@@ -4,12 +4,8 @@
       <div class="card-panel teal lighten-2">
         <h4 class="center white-text">Product Detais</h4>
       </div>
-      <form #imageForm=ngForm (ngSubmit)="OnSubmit(PID,PName,ImageName,Image,Price,Discount,Quantity,IsStock)">
-        <div class="row" *ngIf="check">
-          <div class="input-field col s12">
-            <input type="text" placeholder="" [(ngModel)]='PID' disabled  name="PID" id="PID" >
-            <label for="PID" >ProductId</label>
-          </div>
+      <form #imageForm=ngForm (ngSubmit)="OnSubmit(PID,PName,ImageName,Image,Price,Discount,Quantity,IsStock)" *ngIf="check">
+        <div class="row">
           <div class="input-field col s12">
             <input type="text" placeholder="" [(ngModel)]='PName' name="PName" id="PName" required>
             <label for="PName">ProductName</label>
@@ -38,25 +34,28 @@
             </label>
           </div>
         </div>
-                                
+
         <img [src]="imageUrl"  style="width:250px;height:200px">
 
-        <input type="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
-        <button type="submit" class="btn-large btn-submit" [disabled]="Image.value=='' || !imageForm.valid">Submit</button>
+        <input type="file" [(ngModel)]='ImageName' #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+        <button type="submit" class="btn-large btn-submit" *ngIf="!y" [disabled]="Image.value=='' || !imageForm.valid">Submit</button>
+        <button type="submit" class="btn-large btn-submit" (click)="UpdateProduct(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock)" [disabled]="Image.value=='' || !imageForm.valid" *ngIf="y">Update</button>
+        <br/>
+        <button type="submit" class="btn-large btn-submit" (click)="DeleteProduct(PID)" *ngIf="y">Delete</button>
+      </form>
+
+      <form #imageForm=ngForm *ngIf="x">
+        <div class="input-field col s12">
+          <input type="text" placeholder="" [(ngModel)]='PID' name="PID" id="PID" required>
+          <label for="PID">PID</label>
+        </div>
+        <button type="submit" (click)="getProduct(PID)" class="btn-large btn-submit">Search</button>
       </form>
     </div>
   </div>
 
 
-        <div class="col-md-12">
 
-            <div *ngIf=retrievedImage>
-
-                <img [src]="retrievedImage" alt="shiva" style="width:250px;height:200px">
-
-            </div>
-
-        </div>
 
 </div>
 
