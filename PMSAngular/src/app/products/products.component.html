@@ -3,12 +3,13 @@
 <!-- Navbar goes here -->
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Products</a>
+
     <div class="container">
       <button type="button" id="sidebarCollapse" class="btn btn-info">
           <i class="fas fa-align-left"></i>
           <span>Toggle Sidebar</span>
       </button>
+
       <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <i class="fas fa-align-justify"></i>
       </button>
@@ -29,6 +30,13 @@
     <!-- Page Layout here -->
 
     <div class="container">
+      <form #imageForm=ngForm *ngIf="y">
+        <div class="input-field col s12">
+          <input type="text" placeholder="" [(ngModel)]='PName' name="PName" id="PName" required>
+          <label for="PName">PName</label>
+        </div>
+        <button type="submit" (click)="getProductByName(PName)" class="btn-large btn-submit">Search</button>
+      </form>
       <div class="row">
         <div id="comp-render" [ngSwitch]="display">
           <span *ngSwitchCase=1><app-product [item]='1' *ngIf!="check"></app-product></span>
@@ -49,7 +57,9 @@
               <h5 class="card-title">{{product.PName}}
                 </h5>
               <p class="card-text">₹{{product.Price}}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <p class="card-text">Discount: {{product.Discount}}%</p>
+              <a href="#" class="btn btn-primary">AddToCart</a>
+              <a href="#" class="btn btn-primary">BuyProduct</a>
             </div>
           </div>
 
@@ -75,12 +85,9 @@
         <ul class="list-unstyled components">
 
             <li>
-                <a href="#" data-toggle="collapse" aria-expanded="false">Admin</a>
-                    <a href="#" (click)="onPress(1)">All Products</a>
-                    <a href="#" (click)="onPress(2)">Search Products</a>
+                    <a href="#"  (click)="onPress(1)">All Products</a>
+                    <a href="#" (click)="onPress(2)">Search/Update/Delete Products</a>
                     <a href="#" (click)="onPress(3)">Add Products</a>
-                    <a href="#" (click)="onPress(4)">Update Products</a>
-
             </li>
         </ul>
 

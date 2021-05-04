@@ -25,7 +25,9 @@ export class ProductComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   p:any = new Product();
-  check:any;
+  check:any=true;
+  x:any=false;
+  y: boolean;
 
 
   constructor(private productService : PmsService) {
@@ -34,14 +36,24 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.item==2)
-    this.check=false;
-    else
+    {this.check=false;
+      this.x=true;
+    }
+    else if(this.item==3)
+    {
     this.check=true;
+    this.y=false;
+  }
   }
 
-  getProductByName(PName){
-    this.productService.getProduct(PName).subscribe(response => {
-
+  getProduct(PID){
+    console.log('shiva')
+    this.check=true;
+    this.x=false;
+    this.y=true;
+    debugger;
+    this.productService.getProduct(PID).subscribe(response => {
+      debugger;
       this.p = response;
       this.PID=this.p.PID;
       this.PName=this.p.PName;
@@ -55,6 +67,8 @@ export class ProductComponent implements OnInit {
 
       this.base64Data = this.ImageCode;
       this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+      this.imageUrl='data:image/jpeg;base64,' + this.base64Data;
+      this.x=false;
     },
     error=>{
       alert('An unexpected error occured');
@@ -108,15 +122,8 @@ export class ProductComponent implements OnInit {
   }
 
    OnSubmit(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock){
-    if(this.item==2)
-    {
-      debugger;
-      this.getProductByName(this.PName);
-    }
-    else if(this.item==3)
+    if(this.item==3)
     this.AddProduct(PName,ImageName,Image,Price,Discount,Quantity,IsStock);
-    else if(this.item==4)
-    this.UpdateProduct(PID, PName,ImageName,Image,Price,Discount,Quantity,IsStock);
    }
 }
 

@@ -14,8 +14,13 @@ export class PmsService {
     return this.http.get(this.endpoint+'/GetProducts');
   }
 
-  getProduct(PName: any) {
-    return this.http.get(this.endpoint+'/GetProduct/'+PName);
+  getProduct(PID: any) {
+    
+    return this.http.get(this.endpoint+'/GetProduct/'+PID);
+  }
+
+  getProductsByName(PName: any) {
+    return this.http.get(this.endpoint+'/GetProductsByName/'+PName);
   }
 
   postProduct(PName: string, ImageName: string, fileToUpload: File,Price: string, Discount: string,Quantity: string, IsStock: string) {

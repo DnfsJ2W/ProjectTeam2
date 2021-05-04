@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   p:any = new Product();
-
+y:any=true;
   check:any=true;
 
   constructor(private productService : PmsService) {
@@ -32,13 +32,40 @@ export class ProductsComponent implements OnInit {
     if(x==1)
     this.check=true;
     else
+    {
     this.check=false;
-
+    this.y=false;
+    }
   }
 
   ngOnInit(): void {
 
     this.getProducts();
+  }
+  getProductByName(PName){
+    console.log('shiva')
+debugger;
+    this.productService.getProductsByName(PName).subscribe(response => {
+      debugger;
+      this.p = response;
+      this.PID=this.p.PID;
+      this.PName=this.p.PName;
+      this.ImageName=this.p.ImageName;
+      this.ImageCode=this.p.ImageCode;
+      this.Price=this.p.Price;
+      this.Discount=this.p.Discount;
+      this.Quantity=this.p.Quantity;
+      this.IsStock=this.p.IsStock;
+      this.retrieveResonse = response;
+
+      this.base64Data = this.ImageCode;
+      this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+
+    },
+    error=>{
+      alert('An unexpected error occured');
+      console.log(error);
+    });
   }
   fruits:any;
   getProducts(){

@@ -51,8 +51,8 @@ namespace PMS_WebAPI.Controllers
         public Product GetProduct(int id)
         {
             Product product = (from p in db.Products
-                                        where p.PID == id
-                                        select p).FirstOrDefault();
+                               where p.PID == id
+                               select p).FirstOrDefault();
             Product product1 = new Product()
             {
                 PID = product.PID,
@@ -70,6 +70,37 @@ namespace PMS_WebAPI.Controllers
             //response.Content = new StreamContent(ms);
             //response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpg");
             return product1;
+        }
+
+        //Done by Shiva
+        [HttpGet]
+        [Route("api/GetProductsByName/{Name}")]
+        public List<Product> GetProductsByName(string Name)
+        {
+            List<Product> products = (from p in db.Products
+                                        where p.PName == Name
+                                        select p).ToList();
+            List<Product> products1=new List<Product>();
+            foreach(var product in products) { 
+            Product product1 = new Product()
+            {
+                PID = product.PID,
+                PName = product.PName,
+                ImageName = product.ImageName,
+                ImageCode = product.ImageCode,
+                Discount = product.Discount,
+                IsStock = product.IsStock,
+                Quantity = product.Quantity,
+                Price = product.Price
+            };
+                products1.Add(product1);
+            }
+            //byte[] imgData = product.ImageCode;
+            //MemoryStream ms = new MemoryStream(imgData);
+            //HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            //response.Content = new StreamContent(ms);
+            //response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpg");
+            return products1;
         }
 
         //Done by Shiva
