@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+      <div class="col s8 offset-2">
+        <div class="card-panel teal lighten-2">
+          <h4 class="center white-text">Payment Details</h4>
+        </div>
+        
+        <label for="CardNo">Card Number</label>
+        <input   id="CardNo"  required  [(ngModel)]="payments.CardNo" type="text" class="ccFormatMonitor" placeholder="Card Number">
+        <label for="BankName">Bank Name</label>
+        <input id="BankName"  required  [(ngModel)]="payments.BankName" required minlength="0" >
+        <label for="NameOnCard" >NameOnCard</label>
+        <input id="NameOnCard"  required  [(ngModel)]="payments.NameOnCard" required minlength="0" >
+        <label for="ExpiryDate">ExpiryDate</label>
+        <input 
+               type="text" 
+               id="ExpiryDate" 
+               required  [(ngModel)]="payments.ExpiryDate" 
+               placeholder="MM / YY" 
+               maxlength='7'>
+
+               <button (click)="createPayment()" class="btn btn-default btn-sm">Pay</button>
+
+        
+        <button class="btn btn-default btn-sm"> cancel </button>
+        </div>
+  
+    </div>
+</div>
+  
+  

@@ -48,4 +48,8 @@ export class PmsService {
     console.log('service code')
     return this.http.put(this.endpoint+'UpdateProduct/'+PID, formData);
   }
+  
+    DeleteProduct(PID){
+     return this.http.delete(this.endpoint+'DeleteProduct/'+PID)
+  }
 }
