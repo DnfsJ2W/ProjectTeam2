@@ -17,7 +17,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     ProductComponent,
     ProductsComponent,
-    PaymentsComponent
+    PaymentsComponent,
     
     UsersComponent,
     LoginComponent
