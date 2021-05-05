@@ -7,7 +7,7 @@
     <div class="container">
       <button type="button" id="sidebarCollapse" class="btn btn-info">
           <i class="fas fa-align-left"></i>
-          <span>Toggle Sidebar</span>
+          <span>Admin</span>
       </button>
 
       <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,9 +17,9 @@
 
       </div>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="">Sign In</a></li>
-        <li><a href="">Sign Up</a></li>
-        <li><a href="">Log Out</a></li>
+        <li><a href="#" (click)="onNav('6')">Sign In</a></li>
+        <li><a href="#" (click)="onNav('7')">Sign Up</a></li>
+        <li><a href="#" (click)="onNav('8')">Log Out</a></li>
       </ul>
     </div>
   </div>
@@ -30,6 +30,17 @@
     <!-- Page Layout here -->
 
     <div class="container">
+      <div class="row">
+        <div id="comp-render" [ngSwitch]="display">
+          <span *ngSwitchCase=1><app-product [item]='1' *ngIf="check"></app-product></span>
+          <span *ngSwitchCase=2><app-product [item]='2'></app-product></span>
+          <span *ngSwitchCase=3><app-product [item]='3'></app-product></span>
+          <span *ngSwitchCase=6><app-login></app-login></span>
+          <span *ngSwitchCase=7><app-users></app-users></span>
+          <span *ngSwitchCase=8></span>
+        </div>
+      </div>
+      <div *ngIf="signIn">
       <form #imageForm=ngForm *ngIf="y">
         <div class="input-field col s12">
           <input type="text" placeholder="" [(ngModel)]='PName' name="PName" id="PName" required>
@@ -37,17 +48,9 @@
         </div>
         <button type="submit" (click)="getProductByName(PName)" class="btn-large btn-submit">Search</button>
       </form>
-      <div class="row">
-        <div id="comp-render" [ngSwitch]="display">
-          <span *ngSwitchCase=1><app-product [item]='1' *ngIf!="check"></app-product></span>
-          <span *ngSwitchCase=2><app-product [item]='2'></app-product></span>
-          <span *ngSwitchCase=3><app-product [item]='3'></app-product></span>
-          <span *ngSwitchCase=4><app-product [item]='4'></app-product></span>
-        </div>
-      </div>
-      <div class="row" *ngIf="check">
 
-        <div class="col-md" *ngFor="let product of p">
+      <div class="row" *ngIf="check">
+          <div class="col-md" *ngFor="let product of p">
           <!-- Note that "m8 l9" was added -->
           <div class="card" style="width: 18rem;">
 
@@ -63,7 +66,8 @@
             </div>
           </div>
 
-        </div>
+       </div>
+      </div>
       </div>
 
 
@@ -85,7 +89,6 @@
         <ul class="list-unstyled components">
 
             <li>
-                    <a href="#"  (click)="onPress(1)">All Products</a>
                     <a href="#" (click)="onPress(2)">Search/Update/Delete Products</a>
                     <a href="#" (click)="onPress(3)">Add Products</a>
             </li>
