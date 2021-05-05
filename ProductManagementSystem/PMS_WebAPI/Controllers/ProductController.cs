@@ -22,7 +22,7 @@ namespace PMS_WebAPI.Controllers
         //Done by Shiva
         [HttpGet]
         [Route("api/GetProducts")]
-        public IEnumerable<Product> GetProduct()
+        public IEnumerable<Product> GetProducts()
         {
             IList<Product> products = db.Products.ToList<Product>();
             List<Product> products1 = new List<Product>();
@@ -260,8 +260,7 @@ namespace PMS_WebAPI.Controllers
 
         //Done by Maheshwari
         [HttpDelete]
-       [Route("api/DeleteProduct/{id}")]
-        // [AcceptVerbs("Get")]
+        [Route("api/DeleteProduct/{id}")]
         public void  DeleteProduct(int id)
         { 
             Product product = (from p in db.Products

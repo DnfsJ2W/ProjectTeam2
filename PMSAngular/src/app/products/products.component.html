@@ -59,6 +59,7 @@
             <div class="card-body">
               <h5 class="card-title">{{product.PName}}
                 </h5>
+                <a href="#" class="btn btn-primary" (click)="addToCart(product.PID)">Add To Cart</a>
               <p class="card-text">₹{{product.Price}}</p>
               <p class="card-text">Discount: {{product.Discount}}%</p>
               <a href="#" class="btn btn-primary">AddToCart</a>

@@ -123,19 +123,6 @@ export class ProductComponent implements OnInit {
     if(this.item==3)
     this.AddProduct(PName,ImageName,Image,Price,Discount,Quantity,IsStock);
    }
-   DeleteProduct(PID){
-    this.productService.DeleteProduct(PID)
-    .subscribe(
-      response=>{
-      let index = this.PID.indexOf(PID);
-      this.PID.splice(index,1);
-      },
-      error=>{
-        alert('An unexpected error occured');
-        console.log(error);
-      });
-     
-   }
 }
 
 class Product {
