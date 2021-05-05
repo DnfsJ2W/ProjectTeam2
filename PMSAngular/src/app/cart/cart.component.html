@@ -1,0 +1,20 @@
+<div class="container py-5">  
+    <h3 class="text-center text-uppercase">List of Cart</h3>  
+    <table class="table table-bordered table-striped">  
+        <thead>  
+            <tr class="text-center text-uppercase">  
+                <th>CartId</th>  
+                <th>UserId</th>  
+                <th>ProductId</th>  
+               </tr>  
+        </thead>  
+        <tbody>  
+          <tr *ngFor="let Cart of p">  
+            <td>{{Cart.CartId}}</td>  
+            <td>{{Cart.UserId}}</td>  
+            <td>{{Cart.ProductId}}</td>  
+           </tr>  
+        </tbody>  
+      </table>  
+    </div>  
+
