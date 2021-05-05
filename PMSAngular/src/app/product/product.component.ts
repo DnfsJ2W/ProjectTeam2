@@ -1,5 +1,3 @@
-import { convertActionBinding } from '@angular/compiler/src/compiler_util/expression_converter';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, Input, OnInit } from '@angular/core';
 import { PmsService } from '../pms.service';
 @Component({
@@ -47,13 +45,12 @@ export class ProductComponent implements OnInit {
   }
 
   getProduct(PID){
-    console.log('shiva')
     this.check=true;
     this.x=false;
     this.y=true;
-    debugger;
+
     this.productService.getProduct(PID).subscribe(response => {
-      debugger;
+
       this.p = response;
       this.PID=this.p.PID;
       this.PName=this.p.PName;
@@ -87,6 +84,7 @@ export class ProductComponent implements OnInit {
     }
     reader.readAsDataURL(this.fileToUpload);
   }
+
   AddProduct(PName,ImageName,Image,Price,Discount,Quantity,IsStock){
     this.productService.postProduct(PName,ImageName,this.fileToUpload,Price,Discount,Quantity,IsStock).subscribe(
       data =>{

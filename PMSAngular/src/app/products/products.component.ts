@@ -19,18 +19,22 @@ export class ProductsComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   p:any = new Product();
-y:any=true;
+  y:any=true;
+  signIn:any=true;
   check:any=true;
-
+  checkNav:any=false;
   constructor(private productService : PmsService) {
 
   }
 
   display:any;
   onPress(x:number) {
+
     this.display = x;
     if(x==1)
-    this.check=true;
+    {
+      this.check=true;
+    }
     else
     {
     this.check=false;
@@ -43,10 +47,7 @@ y:any=true;
     this.getProducts();
   }
   getProductByName(PName){
-    console.log('shiva')
-debugger;
     this.productService.getProductsByName(PName).subscribe(response => {
-      debugger;
       this.p = response;
       this.PID=this.p.PID;
       this.PName=this.p.PName;
@@ -99,8 +100,12 @@ debugger;
       console.log(error);
     });
 
-}
-
+  }
+  onNav(x:any){
+    this.display = x;
+    if(x==7 || x==6)
+    this.signIn=false;
+  }
 }class Product {
   PID:any;
   PName:any;

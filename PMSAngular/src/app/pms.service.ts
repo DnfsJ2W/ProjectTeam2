@@ -5,22 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PmsService {
-
   endpoint = 'https://localhost:44335/api/';
 
   constructor(private http : HttpClient) { }
 
-  getProducts() {
-    return this.http.get(this.endpoint+'/GetProducts');
-  }
-
-  getProduct(PID: any) {
-    
+  getProduct(PID: number) {
     return this.http.get(this.endpoint+'/GetProduct/'+PID);
-  }
-
-  getProductsByName(PName: any) {
-    return this.http.get(this.endpoint+'/GetProductsByName/'+PName);
   }
 
   postProduct(PName: string, ImageName: string, fileToUpload: File,Price: string, Discount: string,Quantity: string, IsStock: string) {
@@ -56,5 +46,23 @@ export class PmsService {
   
     DeleteProduct(PID){
      return this.http.delete(this.endpoint+'DeleteProduct/'+PID)
+    }
+  GetPlacedOrders() {
+    return this.http.get(this.endpoint+'GetPlacedOrders/');
+  }
+
+  GetCart() {
+    return this.http.get(this.endpoint+'GetCart/');
   }
 }
+
+
+
+
+
+
+
+
+
+// [{"Product":null,"UserMaster":null,"Payments":[],"OrderId":1,
+// "ProductId":null,"ProductQuantity":1,"UserId":null,"BookingOn":null,"DeliveredOn":null}]
