@@ -287,25 +287,17 @@ namespace PMS_WebAPI.Controllers
         [Route("api/AddOrder")]
         public int AddOrder([FromBody] Payment payment)
         {
-            Payment payments = new Payment();
-           // Order order = new Order();
+            Order order = new Order();
             HttpResponseMessage result = null;
             var httpRequest = HttpContext.Current.Request;
-            // order.OrderId = Convert.ToInt32(httpRequest["OrderId"]);
-            //order.ProductId = Convert.ToInt32(httpRequest["ProductId"]);
-            //order.ProductQuantity = Convert.ToInt32(httpRequest["ProductQuantity"]);
-            //order.UserId = Convert.ToInt32(httpRequest["UserId"]);
-            //order.BookingOn = Convert.ToDateTime(httpRequest["BookingOn"]);
-            //order.DeliveredOn = Convert.ToDateTime(httpRequest["DeliveredOn"]);
-
-            payments.OrderId = Convert.ToInt32(httpRequest["OrderId"]);
-            payments.UserId = Convert.ToInt32(httpRequest["UserId"]);
-            payments.CardNo = Convert.ToString(httpRequest["CardNo"]);
-            payments.BankName = Convert.ToString(httpRequest["BankName"]);
-            payments.NameOnCard = Convert.ToString(httpRequest["NameOnCard"]);
-            payments.ExpiryDate = Convert.ToDateTime(httpRequest["ExpiryDate"]);
-            db.Payments.Add(payments);
-            ///db.Orders.Add(order);
+            order.OrderId = Convert.ToInt32(httpRequest["OrderId"]);
+            order.ProductId = Convert.ToInt32(httpRequest["ProductId"]);
+            order.ProductQuantity = Convert.ToInt32(httpRequest["ProductQuantity"]);
+            order.UserId = Convert.ToInt32(httpRequest["UserId"]);
+            order.BookingOn = Convert.ToDateTime(httpRequest["BookingOn"]);
+            order.DeliveredOn = Convert.ToDateTime(httpRequest["DeliveredOn"]);
+            db.Orders.Add(order);
+            db.Payments.Add(payment);
             db.SaveChanges();
             var max = db.Orders.OrderByDescending(p => p.OrderId).FirstOrDefault().OrderId;
             result = Request.CreateResponse(HttpStatusCode.Created);

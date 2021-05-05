@@ -7,13 +7,14 @@ import { PaymentService }from 'src/app/payment.service';
 })
 export class PaymentsComponent implements OnInit {
   payment = {
+    OrderId:'4',
     CardNo: '',
     BankName: '',
     NameOnCard:'',
     ExpiryDate:'',
-    UserId:'1234'
-  
+    UserId:'1'
   };
+   
   submitted = false;
   constructor(private PaymentService: PaymentService) {
     
@@ -22,15 +23,17 @@ export class PaymentsComponent implements OnInit {
   ngOnInit(): void {
   }
   createPayment(): void {
+   debugger;
     const data = {
       CardNo: this.payment.CardNo,
       BankName: this.payment.BankName,
       NameOnCard: this.payment.NameOnCard,
       ExpiryDate: this.payment.ExpiryDate,
-      UserId: this.payment.UserId
+      UserId: this.payment.UserId,
+    
     };
 
-    this.PaymentService.create(data)
+    this.PaymentService.create(data)   
       .subscribe(
         response => {
           console.log(response);
@@ -40,6 +43,7 @@ export class PaymentsComponent implements OnInit {
           console.log(error);
         });
       }
+     
     }
 
 
