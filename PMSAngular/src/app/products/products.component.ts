@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PmsService } from '../pms.service';
-
+import {CartItemsModel} from '../CartItemsModel';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   p:any = new Product();
+  cartItems: CartItemsModel[] = [];
+
   y:any=true;
   signIn:any=true;
   check:any=true;
@@ -68,6 +70,33 @@ export class ProductsComponent implements OnInit {
       console.log(error);
     });
   }
+
+
+
+  addToCart(PID) {
+
+    let x = this.p.filter(x => x.PID == PID);
+
+
+    if(this.cartItems.filter(x=> x.pid == PID).length>0){
+      this.cartItems.filter(x=> x.pid == PID)[0].quantity = this.cartItems.filter(x=> x.pid == PID)[0].quantity + 1;
+      this.cartItems.filter(x=> x.pid == PID)[0].totalPrice = this.cartItems.filter(x=> x.pid == PID)[0].price*this.cartItems.filter(x=> x.pid == PID)[0].quantity;
+    }
+    else  {
+      let item = new CartItemsModel();
+      item.pid = PID;
+      item.price=x[0].Price;
+      item.productName= x[0].PName;
+      item.quantity=1;
+      item.totalPrice = x[0].Price*item.quantity;
+
+      this.cartItems.push(item);
+    }
+  }
+
+
+
+
   fruits:any;
   getProducts(){
 
